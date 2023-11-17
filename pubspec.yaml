@@ -1,0 +1,33 @@
+name: ble_get_server
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.1.3 <4.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  flutter_blue_plus: ^1.27.2
+  get: 4.6.6
+  flutter: 
+    sdk: flutter
+  fluttertoast: ^8.2.4
+  permission_handler: ^11.0.1
+  android_flutter_wifi: ^0.1.2
+  app_settings: ^5.1.1
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+  # plugin:
+  #   platforms:
+  #     android:
+  #       package: com.spencerccf.app_settings
+  #       pluginClass: AppSettingsPlugin
+  #     ios:
+  #       pluginClass: AppSettingsPlugin
+
