@@ -13,8 +13,18 @@ dependencies:
     sdk: flutter
   fluttertoast: ^8.2.4
   permission_handler: ^11.0.1
-  android_flutter_wifi: ^0.1.2
+  # android_flutter_wifi: ^0.1.2
   app_settings: ^5.1.1
+  # qrcode_barcode_scanner: ^2.0.1
+  # ai_barcode_scanner: ^3.4.1
+  native_barcode_scanner: ^1.0.0
+  network_info_plus: ^4.1.0
+  connectivity: ^3.0.6
+  # location: ^5.0.3
+  # giffy_dialog: ^2.0.0+2
+  # qr_code_scanner: ^1.0.1
+  # barcode_scan:
+  # camera: ^0.9.4+5
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
@@ -27,7 +37,7 @@ flutter:
   #   platforms:
   #     android:
   #       package: com.spencerccf.app_settings
-  #       pluginClass: AppSettingsPlugin
+#       pluginClass: AppSettingsPlugin
   #     ios:
   #       pluginClass: AppSettingsPlugin
 

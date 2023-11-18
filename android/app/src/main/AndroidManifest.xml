@@ -21,12 +21,28 @@
         <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         <uses-feature android:name="android.hardware.wifi" />
+
+        <!-- camera -->
+        <uses-permission android:name="android.permission.CAMERA"/>
+        <uses-feature android:name="android.hardware.camera" android:required="true"/>
+        <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+        <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+        <!-- location -->
+        <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+        <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/> -->
         
         
     <application
         android:label="ble_get_server"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        >
+
+        <meta-data
+        android:name="com.google.mlkit.vision.DEPENDENCIES"
+        android:value="barcode" />
+    <!-- To use multiple models: android:value="barcode,model2,model3" -->
 
         <activity
             android:name=".MainActivity"

@@ -1,3 +1,4 @@
+import 'package:ble_get_server/controller/home_controller.dart';
 import 'package:ble_get_server/controller/main_bluetooth_controller.dart';
 import 'package:ble_get_server/views/list_wifi/list_wifi_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainBluetoothController = MainBluetoothController.instance;
+    final homeC = HomeControler();
 
     return SafeArea(
         child: Scaffold(
@@ -46,12 +48,31 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.wifi_rounded),
                   label: const Text("Pengaturan WIFI")),
-              // TextButton.icon(
-              //     onPressed: () {
-              //       print("testing led");
-              //     },
-              //     icon: const Icon(Icons.online_prediction_outlined),
-              //     label: const Text("Testing LED")),
+              TextButton.icon(
+                  onPressed: () async {
+                    await homeC.testBluetooth();
+                  },
+                  icon: const Icon(Icons.online_prediction_outlined),
+                  label: const Text("Testing LED")),
+              if (homeC.statusLed.value != "") ...[
+                const SizedBox(
+                  height: 10,
+                ),
+                Text("Status LED: ${homeC.statusLed.value}"),
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.network(
+                    homeC.statusLed.value == "ON"
+                        ? "https://cdn.icon-icons.com/icons2/2248/PNG/512/led_off_icon_138425.png"
+                        : "https://cdn.icon-icons.com/icons2/2248/PNG/512/led_variant_off_icon_138422.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
               ElevatedButton(
                   onPressed: () async {
                     await mainBluetoothController.disconnectBluetooth();

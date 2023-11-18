@@ -81,7 +81,9 @@ class MainBluetoothController {
       }
     }
 
-    await deviceConnect.value?.disconnect();
+    if (deviceConnect.value != null) {
+      await deviceConnect.value?.disconnect();
+    }
 
     // process connection started
     processConnect.value = true;

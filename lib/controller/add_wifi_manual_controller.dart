@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:android_flutter_wifi/android_flutter_wifi.dart';
+import 'package:app_settings/app_settings.dart';
 import 'package:ble_get_server/class/gatt_response.dart';
 import 'package:ble_get_server/controller/main_bluetooth_controller.dart';
 import 'package:ble_get_server/utils/utils.dart';
 import 'package:ble_get_server/views/list_wifi/list_wifi_screen.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:network_info_plus/network_info_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AddWifiManualController {
   final passwordControler = TextEditingController().obs;
@@ -39,20 +42,33 @@ class AddWifiManualController {
   // }
 
   Future<void> getInfoWifiFromPhone() async {
-    ActiveWifiNetwork activeWifiNetwork =
-        await AndroidFlutterWifi.getActiveWifiInfo();
+    var locationPermission = await Permission.location.status;
+    var locationStatus = await Permission.location.serviceStatus;
+    if (locationStatus.isDisabled) {
+      AppSettings.openAppSettings(type: AppSettingsType.location);
+      return;
+    }
 
-    if (activeWifiNetwork.ssid != null && activeWifiNetwork.bssid != null) {
-      String stringWithoutQuotes =
-          activeWifiNetwork.ssid.toString().replaceAll('"', '');
-
-      ssidController.value.text = stringWithoutQuotes.toString();
-      bssidController.value.text = activeWifiNetwork.bssid.toString();
+    if (locationPermission.isGranted) {
+      var connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.wifi) {
+        final info = NetworkInfo();
+        var ssidWifi = await info.getWifiName();
+        var bssid = await info.getWifiBSSID();
+        print("================================");
+        print(ssidWifi);
+        print(bssid);
+        print("================================");
+        if (ssidWifi != null && bssid != null) {
+          ssidController.value.text = ssidWifi.toString().replaceAll('"', '');
+          bssidController.value.text = bssid.toString();
+        }
+      } else {
+        // membuka pengaturan wifi
+        AppSettings.openAppSettings(type: AppSettingsType.wifi);
+      }
     } else {
-      AppUtils.toastMessage(
-          msg: "Belum ada WiFi yang tersambung !",
-          bgColor: Colors.red,
-          txtColor: Colors.white);
+      openAppSettings();
     }
   }
 

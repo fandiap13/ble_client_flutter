@@ -1,5 +1,6 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:ble_get_server/controller/add_wifi_manual_controller.dart';
+import 'package:ble_get_server/views/scan_qr_code/scan_qr_code.dart';
 import 'package:flutter/material.dart';
 
 class AddWifiManualScreen extends StatefulWidget {
@@ -58,13 +59,19 @@ class _AddWifiManualScreenState extends State<AddWifiManualScreen> {
                         icon: const Icon(Icons.settings),
                         label: const Text(
                             "Pakai WiFi yang tersambung di smartphone")),
-                    TextButton.icon(
-                        onPressed: () async {
-                          AppSettings.openAppSettings(
-                              type: AppSettingsType.wifi);
-                        },
-                        icon: const Icon(Icons.settings),
-                        label: const Text("Buka pengaturan WIFI")),
+                    // TextButton.icon(
+                    //     onPressed: () {
+                    //       Navigator.pushNamed(context, ScanQrCode.routeName);
+                    //     },
+                    //     icon: const Icon(Icons.qr_code),
+                    //     label: const Text("Scan QR Code")),
+                    // TextButton.icon(
+                    //     onPressed: () async {
+                    //       AppSettings.openAppSettings(
+                    //           type: AppSettingsType.wifi);
+                    //     },
+                    //     icon: const Icon(Icons.settings),
+                    //     label: const Text("Buka pengaturan WIFI")),
                     TextFormField(
                       controller: addWifiManual.bssidController.value,
                       validator: (value) {
